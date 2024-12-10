@@ -155,14 +155,6 @@ def filtar_productos():
         print(Fore.YELLOW + f"{producto[0]}  | " + Fore.WHITE + f"{producto[1]}" + Fore.WHITE + " | " + Fore.MAGENTA + f"{producto[2]}" + Fore.YELLOW + " | " + Fore.WHITE + f"{producto[3]}" + Fore.YELLOW + " | " + Fore.BLUE + f"{producto[4]}" + Fore.YELLOW + " | " + Fore.GREEN + f"{producto[5]}")
         print(Fore.YELLOW + "-------------------------------------------------")
 
-        # print(Fore.YELLOW + " --ID:" + Fore.LIGHTGREEN_EX + f" {producto[0]}" + Fore.YELLOW + " --Producto:"  +  Fore.LIGHTGREEN_EX  +  f" {producto[1]}" + Fore.YELLOW + " -- Descrip: " +  Fore.LIGHTGREEN_EX + f"{producto[2]}" + Fore.YELLOW + " -- Categoria: " +  Fore.LIGHTGREEN_EX
-        # + f"{producto[3]}"  + Fore.YELLOW + " --Stock:" +  Fore.LIGHTGREEN_EX +  f" {producto[4]}" + Fore.YELLOW + " --Precio:"  +  Fore.LIGHTGREEN_EX +  f" {producto[5]}" + Style.RESET_ALL)
-        # print(Fore.YELLOW + "\n-----------------------------------")
-
-    # for producto in productos:
-    #     print(Fore.YELLOW + " --ID:" + Fore.LIGHTGREEN_EX + f" {producto[0]}" + Fore.YELLOW + " --Producto:"  +  Fore.LIGHTGREEN_EX  +  f" {producto[1]}" + Fore.YELLOW + " -- Descrip: " +  Fore.LIGHTGREEN_EX + f"{producto[2]}" + Fore.YELLOW + " -- Categoria: " +  Fore.LIGHTGREEN_EX  + f"{producto[3]}"  + Fore.YELLOW + " --Stock:" +  Fore.LIGHTGREEN_EX +  f" {producto[4]}" + Fore.YELLOW + " --Precio:"  +  Fore.LIGHTGREEN_EX +  f" {producto[5]}" + Style.RESET_ALL)
-    # print(Fore.YELLOW + "\n-----------------------------------")
-
 
 #? ##########################  OPCION 3 - Actualización: Modificar cantidad de stock del producto ###################################
 
