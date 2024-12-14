@@ -1,4 +1,6 @@
 import sqlite3 as sql
+from colorama import init, Fore, Style
+init()
 
 #? ------------------- Crea la base de datos 'inventario.db' si no existe. ---------------------------------
 def createDB(): #? se crea la DB
@@ -69,7 +71,6 @@ def buscar_producto_por_id(id):
         if conn:
             conn.close()
 
-
 #? --------------------------------- BUSCAR UN PRODUCTO POR NOMBRE, DEVUELVE UNA LISTA DE UN SOLO PRODUCTO ------------------------------------------
 
 def buscar_producto_por_nombre(nombre):
@@ -90,8 +91,6 @@ def buscar_producto_por_nombre(nombre):
     finally:
         if conn:
             conn.close()
-
-
 
 #? --------------------------------- BUSCAR VARIOS PRODUCTOS POR  NOMBRE, DEVUELVE UNA LISTA DE LOS PRODUCTOS ------------------------------------------
 
@@ -239,47 +238,64 @@ def eliminar_producto(id_producto):
             conn.close()
 
 
+#? ---------------- MODIFICAR EL INVENTARIO ------------------------------------------
+def modificar_stock_inventario(id_producto, cantidad, transaccion):
+    def verificar_stock_bajo(stock_actual):
+        """Alertas si el stock es bajo o agotado."""
+        if stock_actual == 0:
+            print(Fore.RED + Style.BRIGHT + "El producto con ID: " + Fore.WHITE + Style.BRIGHT + f"{id_producto} " + Fore.RED + Style.BRIGHT + "está agotado.")
+        elif stock_actual <= 25:
+            print(Fore.RED + Style.BRIGHT + f"El producto con ID: " + Fore.WHITE + Style.BRIGHT + f"{id_producto} " + Fore.RED + Style.BRIGHT + "está en stock bajo.")
 
-# #? ----------------  CALCULAR EL INVENTARIO TOTAL ------------------------------------------
+    if transaccion not in ["entrada", "salida"]:
+        print(Fore.RED + Style.BRIGHT + "Transacción inválida. Debe ser 'entrada' o 'salida'.")
+        return False
+    # Se valida que la cantidad sea positiva
+    if cantidad <= 0:
+        print(Fore.RED + Style.BRIGHT + "La cantidad debe ser mayor a cero.")
+        return False
 
-# def calcular_inventario_total():
-#     try:
-#         conn = sql.connect("inventario.db")
-#         c = conn.cursor()
-#         consulta = "SELECT SUM(cantidad) AS total FROM productos"
-#         c.execute(consulta)
-#         inventario_total = c.fetchone()[0]
-#         return inventario_total
-#     except sql.Error as e:
-#         print(f"Error al calcular el inventario total: {e}")
-#         return 0
-#     finally:
-#         if conn:
-#             conn.close()
+    try:
+        conn = sql.connect("inventario.db")
+        c = conn.cursor()
+        c.execute("SELECT cantidad FROM productos WHERE id = ?", (id_producto,))
+        cantidad_actual = c.fetchone()
 
-# #? ----------------  CALCULAR EL VALOR TOTAL DEL INVENTARIO ------------------------------------------
+        if not cantidad_actual:
+            print(Fore.RED + Style.BRIGHT + f"El producto con ID: " + Fore.WHITE + Style.BRIGHT + f"{id_producto} " + Fore.RED + Style.BRIGHT + "no existe.")
+            return False
 
-# def calcular_valor_total_del_inventario():
-#     try:
-#         conn = sql.connect("inventario.db")
-#         c = conn.cursor()
-#         consulta = "SELECT SUM(precio * cantidad) AS total FROM productos"
-#         c.execute(consulta)
-#         valor_total_del_inventario = c.fetchone()[0]
-#         return valor_total_del_inventario
-#     except sql.Error as e:
-#         print(f"Error al calcular el valor total del inventario: {e}")
-#         return 0
-#     finally:
-#         if conn:
-#             conn.close()
+        stock_actual = cantidad_actual[0]
 
+        if transaccion == "entrada":
+            nueva_cantidad = stock_actual + cantidad
+            consulta = "UPDATE productos SET cantidad = ? WHERE id = ?"
+            c.execute(consulta, (nueva_cantidad, id_producto))
+            print(Fore.GREEN + Style.BRIGHT + "Se ha registrado una entrada para el producto con ID: " + Fore.WHITE + Style.BRIGHT + f"{id_producto}, " + Fore.GREEN + Style.BRIGHT + "y de Cantidad: " + Fore.WHITE + Style.BRIGHT + f"{cantidad}.")
 
+        elif transaccion == "salida":
+            if cantidad > stock_actual:
+                print(Fore.RED + Style.BRIGHT + "No se puede realizar la venta del producto. El Stock actual: " + Fore.WHITE + Style.BRIGHT + f"({stock_actual}), " + Fore.RED + Style.BRIGHT + "es insuficiente.")
+                return False
 
+            nueva_cantidad = stock_actual - cantidad
+            consulta = "UPDATE productos SET cantidad = ? WHERE id = ?"
+            c.execute(consulta, (nueva_cantidad, id_producto))
+            print(Fore.RED + Style.BRIGHT + f"Se ha registrado una salida para el producto con ID: " + Fore.WHITE + Style.BRIGHT + f"{id_producto}, " + Fore.RED + Style.BRIGHT + "con una Cantidad de: " + Fore.WHITE + Style.BRIGHT + f"{cantidad}." + Style.RESET_ALL)
 
+        # Se Verifica el estado del Stock
+        verificar_stock_bajo(nueva_cantidad)
 
+        conn.commit()
+        return True
 
+    except sql.Error as e:
+        print(Fore.RED + f"Error al registrar la transacción: {e}")
+        return False
 
+    finally:
+        if conn:
+            conn.close()
 
 
 

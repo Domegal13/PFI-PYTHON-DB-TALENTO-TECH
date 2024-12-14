@@ -6,7 +6,7 @@ from colorama import init, Fore, Style
 init()
 
 nombre_regex = r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\W]*$'     # Expresión Regugal para validar nombres
-categoria_regex = r"^[a-zA-Z\s]{3,50}$"
+categoria_regex = r"^[a-zA-Z\s]{2,50}$"
 descripcion_regex = r"^(|[a-zA-Z0-9\s\.,\-']{1,100})$"
 
 
@@ -57,14 +57,14 @@ def validar_cantidad(cantidad):      # Valída que la cantidad ingresada sea may
         return True
 
 #? ########################## FUNCTION VALIDAR PRECIO #######################################################
-def validar_precio(precio):      # Valída que la cantidad ingresada sea mayor a cero
+def validar_precio(precio):      # Valída que la precio ingresado sea mayor a cero
     if precio <= 0 :
         print(Fore.RED + "\nEL precio debe ser mayor a cero")
         return False
     else:
         return True
 
-#? ########################## FUNCTION MOSTRAR MENU ###########################################################
+#? ########################## FUNCTION MOSTRAR MENU PRINCIPAL ###########################################################
 def mostrar_menu():
     print( "\n" + Fore.YELLOW +  Style.BRIGHT + " -- Menú de Gestión de Productos --- \n" + Style.RESET_ALL)
     print("1- Registro: " + Fore.LIGHTBLUE_EX + "Alta de productos nuevos" + Style.RESET_ALL)
@@ -161,67 +161,52 @@ def filtar_productos():
 #! ####################################### MENU STOTK ######################################################
 def mostrar_menu_stock():
     print(Fore.YELLOW + Style.BRIGHT + "\n--- Menú Modificar Stock ---")
-    print(Fore.YELLOW +  Style.BRIGHT + "\n1- Aumentar Stock")
-    print("2- Disminuir Stock")
-    print("3- Salir")
+    print(Fore.WHITE + Style.BRIGHT + "\n1- Registrar Compra de Producto: " + Fore.BLUE + "(Aumentar Stock)" + Style.RESET_ALL)
+    print(Fore.WHITE + Style.BRIGHT +"2- Registrar Venta de Producto: " + Fore.BLUE + " (Disminuir Stock)" + Style.RESET_ALL)
+    print(Fore.WHITE + Style.BRIGHT + "3- Salir" + Style.RESET_ALL)
 
 #! #######################################  AUMENTAR EL STOCK ##############################################
-def aumentar_stock():
+
+def registrar_compra():
     try:
-        nombre_producto = input(Style.RESET_ALL + "\nIntrozca el nombre del producto: ")
-        nombre_producto = nombre_producto.upper().strip()
-        nombre_validado = validar_nombre(nombre_producto)
-        if nombre_validado :
-            bandera=True
-            for producto in lista_productos:
-                if nombre_producto == producto[0]:
-                    bandera=False
-                    cantidad_producto = int(input("intruduzca la cantidad a ingresar: "))
-                    cantidad_validada = validar_cantidad(cantidad_producto)
-                    if cantidad_validada:
-                        producto[1] += cantidad_producto
-                        break
-            if bandera:        # Verifica que el nombre ingresado no se encuentre en la lista_productos
-                print(Fore.RED + Style.BRIGHT + "\nEl producto: " + Fore.WHITE + f"{nombre_producto}" + Fore.RED + Style.BRIGHT +  " no existe..." + Style.RESET_ALL)
-        else:
-            print(Fore.RED + Style.BRIGHT + "\nIntroduzca un nombre de producto correcto" + Style.RESET_ALL)
+        transaccion = "entrada"
+        id_producto = int(input(Fore.YELLOW + Style.BRIGHT + "introduzca el id del producto: " + Fore.WHITE + Style.BRIGHT))
+        cantidad_compra = int(input(Fore.YELLOW + Style.BRIGHT + "introduzca la cantidad de producto comprada: " + Fore.WHITE + Style.BRIGHT))
+        crud_db.modificar_stock_inventario(id_producto, cantidad_compra, transaccion)
     except ValueError:
         print(Fore.RED + Style.BRIGHT + "\nLa cantidad debe ser numérica" + Style.RESET_ALL)
+    except Exception as e:
+        print(Fore.RED + Style.BRIGHT + f"\nError inesperado: {e}" + Style.RESET_ALL)
+    finally:
+        print(Fore.YELLOW + Style.BRIGHT + "\n--- Fin de Registro de Compra ---\n" + Style.RESET_ALL)
+
+
 
 #! ####################################### DISMINUIR EL STOCK ##############################################
-def disminuir_stock():
+def registrar_venta():
     try:
-        nombre_producto = input(Style.RESET_ALL + "\nIntroduzca el nombre del producto: ")
-        nombre_producto = nombre_producto.upper().strip()
-        nombre_validado = validar_nombre(nombre_producto)
-        if nombre_validado :
-            bandera=True
-            for producto in lista_productos:
-                if nombre_producto == producto[0]:
-                    bandera=False
-                    cantidad_producto = int(input("Introduzca la cantidad a disminuir: "))
-                    cantidad_validada = validar_cantidad(cantidad_producto)
-                    if cantidad_validada:
-                        if cantidad_producto > producto[1]:
-                            print(Fore.RED + "\nLa cantidad debe ser menor que la cantidad del Stock" + Style.RESET_ALL)
-                            break
-                        else:
-                            producto[1] -= cantidad_producto
-                            break
-            if bandera:   # Verifica que el nombre ingresado no se encuentre en la lista_productos
-                print(Fore.RED + Style.BRIGHT + "\nEl producto: " + Fore.WHITE + f"{nombre_producto}" + Fore.RED + Style.BRIGHT +  " no existe..." + Style.RESET_ALL)
-        else:
-            print(Fore.RED + Style.BRIGHT + "\nIntroduzca un nombre de producto correcto")
+        transaccion = "salida"
+        id_producto = int(input(Fore.YELLOW + Style.BRIGHT + "introduzca el id del producto: " + Fore.WHITE + Style.BRIGHT))
+        cantidad_venta = int(input(Fore.YELLOW + Style.BRIGHT + "introduzca la cantidad de producto vendida: " + Fore.WHITE + Style.BRIGHT))
+        crud_db.modificar_stock_inventario(id_producto, cantidad_venta, transaccion)
     except ValueError:
-        print(Fore.RED + Style.BRIGHT + "\nLa cantidad debe ser numérica")
+        print(Fore.RED + Style.BRIGHT + "\nLa cantidad debe ser numérica" + Style.RESET_ALL)
+    except Exception as e:
+        print(Fore.RED + Style.BRIGHT + f"\nError inesperado: {e}" + Style.RESET_ALL)
+    finally:
+        print(Fore.YELLOW + Style.BRIGHT + "\n--- Fin de Registro de Venta ---\n" + Style.RESET_ALL)
+        # limpiar_consola()
+
 
 #! ####################################### SWITCH CASE MODIFICAR STOCK #####################################
 def switch_case_stock(opc):
     match(opc):
         case 1:
-            aumentar_stock()
+            limpiar_consola()
+            registrar_compra()
         case 2:
-            disminuir_stock()
+            limpiar_consola()
+            registrar_venta()
         case 3:
             print(Fore.YELLOW + Style.BRIGHT + "\nSaliendo de Modificar Stock" + Style.RESET_ALL)
         case _:
@@ -233,7 +218,7 @@ def modificar_stock():
     while opc != 3:
         mostrar_menu_stock()
         try:
-            opc = int(input(Fore.YELLOW + Style.BRIGHT + "\nSeleccione una opción 1-3: "))
+            opc = int(input(Fore.YELLOW + Style.BRIGHT + "\nSeleccione una opción 1-3: " + Style.RESET_ALL))
             switch_case_stock(opc)
         except ValueError:
             print(Fore.RED + Style.BRIGHT + "\nOpción Inválida...")
@@ -291,7 +276,6 @@ def mostrar_un_producto():
             print(Fore.YELLOW + f"{producto[0]}  | " + Fore.WHITE + f"{producto[1]}" + Fore.WHITE + " | " + Fore.MAGENTA + f"{producto[2]}" + Fore.YELLOW + " | " + Fore.WHITE + f"{producto[3]}" + Fore.YELLOW + " | " + Fore.BLUE + f"{producto[4]}" + Fore.YELLOW + " | " + Fore.GREEN + f"{producto[5]}")
             print(Fore.YELLOW + "----------------------------------------------------------------")
 
-
 #! ####################################### ORDENAR STOTK POR CATEGORIA ######################################################
 def ordenar_por_categoria():
     categoria = input(Fore.YELLOW + "\nIntroduzca la Categoría a buscar: " + Style.RESET_ALL)
@@ -332,8 +316,6 @@ def mostrar_productos():
         except ValueError:
             print(Fore.RED + Style.BRIGHT + "\nOpción Inválida...")
 
-
-
 #? ##########################  OPCION 6 - Reporte de bajo stock: Lista de productos con cantidad bajo mínimo ###################################
 
 #! ######################################### MOSTRAR MENU DE REPORTE DE STOCK ####################################################
@@ -349,36 +331,36 @@ def reporte_stock(opc):
         limpiar_consola()
         lista_stock_bajo = crud_db.mostrar_productos_con_stock_bajo()
         if len(lista_stock_bajo) > 0:
-            print(Fore.YELLOW + "\n----------------------- LISTADO DE PRODUCTOS STOCK BAJO -----------------------\n")
+            print(Fore.YELLOW + "\n------------------------------- LISTADO DE PRODUCTOS STOCK BAJO ---------------------------------\n")
             print(Fore.YELLOW + "ID | " + Fore.WHITE + " Producto " + Fore.YELLOW + " | " + Fore.MAGENTA + " Descripción " + Fore.YELLOW + " | " + Fore.WHITE + " Categoría " + Fore.YELLOW + " | " + Fore.BLUE + " Stock " + Fore.YELLOW + " | " + Fore.GREEN + " Precio \n")
-            print(Fore.YELLOW + "----------------------------------------------------------------")
+            print(Fore.YELLOW + "------------------------------------------------------------------------------------------------")
             for bajo in lista_stock_bajo:
                 print(Fore.YELLOW + f"{bajo[0]}  | " + Fore.WHITE + f"{bajo[1]}" + Fore.WHITE + " | " + Fore.MAGENTA + f"{bajo[2]}" + Fore.YELLOW + " | " + Fore.WHITE + f"{bajo[3]}" + Fore.YELLOW + " | " + Fore.BLUE + f"{bajo[4]}" + Fore.YELLOW + " | " + Fore.GREEN + f"{bajo[5]}")
-            print(Fore.YELLOW + "\n----------------------------------------------------------------")
+                print(Fore.YELLOW + "------------------------------------------------------------------------------------------------")
         else:
             print(Fore.RED + Style.BRIGHT + "\nNo hay productos para mostrar")
     elif opc == 2:
         limpiar_consola()
         lista_stock_medio = crud_db.mostrar_productos_con_stock_medio()
         if len(lista_stock_medio) > 0:
-            print(Fore.YELLOW + "\n----------------------- LISTADO DE PRODUCTOS STOCK MEDIO -----------------------\n")
+            print(Fore.YELLOW + "\n------------------------------- LISTADO DE PRODUCTOS STOCK MEDIO ---------------------------------\n")
             print(Fore.YELLOW + "ID | " + Fore.WHITE + " Producto " + Fore.YELLOW + " | " + Fore.MAGENTA + " Descripción " + Fore.YELLOW + " | " + Fore.WHITE + " Categoría " + Fore.YELLOW + " | " + Fore.BLUE + " Stock " + Fore.YELLOW + " | " + Fore.GREEN + " Precio \n")
-            print(Fore.YELLOW + "----------------------------------------------------------------")
+            print(Fore.YELLOW + "------------------------------------------------------------------------------------------------")
             for medio in lista_stock_medio:
                 print(Fore.YELLOW + f"{medio[0]}  | " + Fore.WHITE + f"{medio[1]}" + Fore.WHITE + " | " + Fore.MAGENTA + f"{medio[2]}" + Fore.YELLOW + " | " + Fore.WHITE + f"{medio[3]}" + Fore.YELLOW + " | " + Fore.BLUE + f"{medio[4]}" + Fore.YELLOW + " | " + Fore.GREEN + f"{medio[5]}")
-            print(Fore.YELLOW + "\n----------------------------------------------------------------")
+                print(Fore.YELLOW + "------------------------------------------------------------------------------------------------")
         else:
             print(Fore.RED + Style.BRIGHT + "\nNo hay productos para mostrar")
     elif opc == 3:
         limpiar_consola()
         lista_stock_alto = crud_db.mostrar_productos_con_stock_alto()
         if len(lista_stock_alto) > 0:
-            print(Fore.YELLOW + "\n----------------------- LISTADO DE PRODUCTOS STOCK ALTO-----------------------\n")
+            print(Fore.YELLOW + "\n------------------------------- LISTADO DE PRODUCTOS STOCK ALTO---------------------------------\n")
             print(Fore.YELLOW + "ID | " + Fore.WHITE + " Producto " + Fore.YELLOW + " | " + Fore.MAGENTA + " Descripción " + Fore.YELLOW + " | " + Fore.WHITE + " Categoría " + Fore.YELLOW + " | " + Fore.BLUE + " Stock " + Fore.YELLOW + " | " + Fore.GREEN + " Precio \n")
-            print(Fore.YELLOW + "----------------------------------------------------------------")
+            print(Fore.YELLOW + "------------------------------------------------------------------------------------------------")
             for alto in lista_stock_alto:
                 print(Fore.YELLOW + f"{alto[0]}  | " + Fore.WHITE + f"{alto[1]}" + Fore.WHITE + " | " + Fore.MAGENTA + f"{alto[2]}" + Fore.YELLOW + " | " + Fore.WHITE + f"{alto[3]}" + Fore.YELLOW + " | " + Fore.BLUE + f"{alto[4]}" + Fore.YELLOW + " | " + Fore.GREEN + f"{alto[5]}")
-            print(Fore.YELLOW + "----------------------------------------------------------------")
+                print(Fore.YELLOW + "------------------------------------------------------------------------------------------------")
         else:
             print(Fore.RED + Style.BRIGHT + "\nNo hay productos para mostrar")
     elif opc == 4:
