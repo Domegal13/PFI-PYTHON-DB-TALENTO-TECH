@@ -70,7 +70,7 @@ def mostrar_menu():
     print(Fore.WHITE +  Style.BRIGHT + "1- Registro: " + Fore.LIGHTBLUE_EX + "Alta de productos nuevos" + Style.RESET_ALL)
     print(Fore.WHITE +  Style.BRIGHT + "2- Visualización: " + Fore.LIGHTBLUE_EX + "Consultar datos de todos productos" + Style.RESET_ALL)
     print(Fore.WHITE +  Style.BRIGHT + "3- Actualización: " + Fore.LIGHTBLUE_EX + "Modificar datos ó cantidad de stock del producto" + Style.RESET_ALL)
-    print(Fore.WHITE +  Style.BRIGHT + "4- Elimininación: " + Fore.LIGHTBLUE_EX + "Dar de baja productos" + Style.RESET_ALL)
+    print(Fore.WHITE +  Style.BRIGHT + "4- Eliminación: " + Fore.LIGHTBLUE_EX + "Dar de baja productos" + Style.RESET_ALL)
     print(Fore.WHITE +  Style.BRIGHT + "5- Listado: " + Fore.LIGHTBLUE_EX + "Listado por Nombre ó Categoria de Productos" + Style.RESET_ALL)
     print(Fore.WHITE +  Style.BRIGHT + "6- Reporte de Stock: " + Fore.LIGHTBLUE_EX + "Lista de productos con cantidad Bajo, Medio, Alto" + Style.RESET_ALL)
     print(Fore.WHITE +  Style.BRIGHT + "7- Salir\n")
