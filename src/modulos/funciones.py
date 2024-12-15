@@ -5,13 +5,15 @@ from . import crud_db
 from colorama import init, Fore, Style
 init()
 
-nombre_regex = r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\W]*$'     # Expresión Regugal para validar nombres
+nombre_regex = r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\W]*$'     # Expresión Regular para validar nombres
+# categoria_regex1 = r"^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\W]{2,49}$"
 categoria_regex = r"^[a-zA-Z\s]{2,50}$"
-descripcion_regex = r"^(|[a-zA-Z0-9\s\.,\-']{1,100})$"
+# descripcion_regex1 = r"^(|[a-zA-Z0-9\s\.,\-']{1,100})$"
+descripcion_regex = r"^(|[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\.,\-']{1,100})$"
 
 
 #? ########################## VARIABLES GLOBALES ##############################################################
-lista_productos = []
+# lista_productos = []
 
 
 #? ########################## FUNCTION LIMPIAR CONSOLA #########################################################
@@ -163,7 +165,8 @@ def mostrar_menu_stock():
     print(Fore.YELLOW + Style.BRIGHT + "\n--- Menú Modificar Stock ---")
     print(Fore.WHITE + Style.BRIGHT + "\n1- Registrar Compra de Producto: " + Fore.BLUE + "(Aumentar Stock)" + Style.RESET_ALL)
     print(Fore.WHITE + Style.BRIGHT +"2- Registrar Venta de Producto: " + Fore.BLUE + " (Disminuir Stock)" + Style.RESET_ALL)
-    print(Fore.WHITE + Style.BRIGHT + "3- Salir" + Style.RESET_ALL)
+    print(Fore.WHITE + Style.BRIGHT +"3- Modificar Producto: " + Fore.BLUE + " (Nombre, Descrip, Categoría, Stock, Precio)" + Style.RESET_ALL)
+    print(Fore.WHITE + Style.BRIGHT + "4- Salir" + Style.RESET_ALL)
 
 #! #######################################  AUMENTAR EL STOCK ##############################################
 

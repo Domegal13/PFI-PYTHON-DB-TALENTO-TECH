@@ -247,6 +247,7 @@ def modificar_stock_inventario(id_producto, cantidad, transaccion):
         elif stock_actual <= 25:
             print(Fore.RED + Style.BRIGHT + f"El producto con ID: " + Fore.WHITE + Style.BRIGHT + f"{id_producto} " + Fore.RED + Style.BRIGHT + "está en stock bajo.")
 
+    # Se verifica que la Transacción es diferente a 'entrada' ó 'salida'
     if transaccion not in ["entrada", "salida"]:
         print(Fore.RED + Style.BRIGHT + "Transacción inválida. Debe ser 'entrada' o 'salida'.")
         return False
