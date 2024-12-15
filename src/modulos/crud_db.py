@@ -40,9 +40,9 @@ def create_table():
 def registrar_producto(nombre, descripcion, categoria, cantidad, precio):
     try:
         conn = sql.connect("inventario.db")
-        instruccion = "INSERT INTO productos (nombre, descripcion, categoria, cantidad, precio) VALUES (?, ?, ?, ?, ?)"
+        consulta = "INSERT INTO productos (nombre, descripcion, categoria, cantidad, precio) VALUES (?, ?, ?, ?, ?)"
         c = conn.cursor()
-        c.execute(instruccion, (nombre, descripcion, categoria, cantidad, precio))
+        c.execute(consulta, (nombre, descripcion, categoria, cantidad, precio))
         conn.commit()
     except sql.Error as e:
         print(f"Error al registrar el producto: {e}")

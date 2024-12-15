@@ -6,9 +6,7 @@ from colorama import init, Fore, Style
 init()
 
 nombre_regex = r'^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\W]*$'     # Expresión Regular para validar nombres
-# categoria_regex1 = r"^[a-zA-ZñÑáéíóúÁÉÍÓÚ][a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\W]{2,49}$"
 categoria_regex = r"^[a-zA-Z\s]{2,50}$"
-# descripcion_regex1 = r"^(|[a-zA-Z0-9\s\.,\-']{1,100})$"
 descripcion_regex = r"^(|[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s\.,\-']{1,100})$"
 
 
@@ -71,7 +69,7 @@ def mostrar_menu():
     print( "\n" + Fore.YELLOW +  Style.BRIGHT + " -- Menú de Gestión de Productos --- \n" + Style.RESET_ALL)
     print("1- Registro: " + Fore.LIGHTBLUE_EX + "Alta de productos nuevos" + Style.RESET_ALL)
     print("2- Visualización: " + Fore.LIGHTBLUE_EX + "Consultar datos de todos productos" + Style.RESET_ALL)
-    print("3- Actualización: " + Fore.LIGHTBLUE_EX + "Modificar cantidad de stock del producto" + Style.RESET_ALL)
+    print("3- Actualización: " + Fore.LIGHTBLUE_EX + "Modificar datos ó cantidad de stock del producto" + Style.RESET_ALL)
     print("4- Elimininación: " + Fore.LIGHTBLUE_EX + "Dar de baja productos" + Style.RESET_ALL)
     print("5- Listado: " + Fore.LIGHTBLUE_EX + "Listado por Nombre ó Categoria de Productos" + Style.RESET_ALL)
     print("6- Reporte de Stock: " + Fore.LIGHTBLUE_EX + "Lista de productos con cantidad Bajo, Medio, Alto" + Style.RESET_ALL)
@@ -141,8 +139,6 @@ def agregar_producto():
     crud_db.registrar_producto(nombre_producto, descripcion_producto, categoria_producto, cantidad_producto, precio_producto)
     print(Fore.GREEN + "\nProducto registrado correctamente\n")
 
-
-
 #? ##########################  OPCION 2 - Visualización: Consulta datos de productos ###################################
 
 def filtar_productos():
@@ -197,11 +193,8 @@ def registrar_venta():
         print(Fore.RED + Style.BRIGHT + f"\nError inesperado: {e}" + Style.RESET_ALL)
     finally:
         print(Fore.YELLOW + Style.BRIGHT + "\n--- Fin de Registro de Venta ---\n" + Style.RESET_ALL)
-        # limpiar_consola()
-
 
 #! ####################################### MODIFICAR PRODUCTO: NOMBRE, DESCRIPCIÓN, CATEGORÍA, STOCK, PRECIO ##############################################
-
 def modificar_producto():
     try:
         # Solicitar el ID del producto
@@ -250,11 +243,7 @@ def modificar_producto():
         print(Fore.RED + Style.BRIGHT + f"\nError inesperado: {e}" + Style.RESET_ALL)
     finally:
         print(Fore.YELLOW + Style.BRIGHT + "\n--- Fin de Modificación ---\n" + Style.RESET_ALL)
-        # limpiar_consola()
-    return nombre_nuevo, descripcion_nueva, categoria_nueva, stock_nuevo, precio_nuevo
-
-
-#! ####################################### LIMPIAR CONSOLA ########################################
+    # return nombre_nuevo, descripcion_nueva, categoria_nueva, stock_nuevo, precio_nuevo
 
 #! ####################################### SWITCH CASE MODIFICAR STOCK #####################################
 def switch_case_stock(opc):
@@ -442,8 +431,6 @@ def mostrar_reporte_productos():
             print(Fore.RED + Style.BRIGHT + "\nOpción Inválida...")
 
     limpiar_consola()
-
-
 
 #? ##########################   SWITCH CASE OPTIONS MAIN ######################################################################
 def menu_switch_case(opcion_seleccionada):
