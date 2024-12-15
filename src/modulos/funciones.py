@@ -67,13 +67,13 @@ def validar_precio(precio):      # Valída que la precio ingresado sea mayor a c
 #? ########################## FUNCTION MOSTRAR MENU PRINCIPAL ###########################################################
 def mostrar_menu():
     print( "\n" + Fore.YELLOW +  Style.BRIGHT + " -- Menú de Gestión de Productos --- \n" + Style.RESET_ALL)
-    print("1- Registro: " + Fore.LIGHTBLUE_EX + "Alta de productos nuevos" + Style.RESET_ALL)
-    print("2- Visualización: " + Fore.LIGHTBLUE_EX + "Consultar datos de todos productos" + Style.RESET_ALL)
-    print("3- Actualización: " + Fore.LIGHTBLUE_EX + "Modificar datos ó cantidad de stock del producto" + Style.RESET_ALL)
-    print("4- Elimininación: " + Fore.LIGHTBLUE_EX + "Dar de baja productos" + Style.RESET_ALL)
-    print("5- Listado: " + Fore.LIGHTBLUE_EX + "Listado por Nombre ó Categoria de Productos" + Style.RESET_ALL)
-    print("6- Reporte de Stock: " + Fore.LIGHTBLUE_EX + "Lista de productos con cantidad Bajo, Medio, Alto" + Style.RESET_ALL)
-    print("7- Salir\n")
+    print(Fore.WHITE +  Style.BRIGHT + "1- Registro: " + Fore.LIGHTBLUE_EX + "Alta de productos nuevos" + Style.RESET_ALL)
+    print(Fore.WHITE +  Style.BRIGHT + "2- Visualización: " + Fore.LIGHTBLUE_EX + "Consultar datos de todos productos" + Style.RESET_ALL)
+    print(Fore.WHITE +  Style.BRIGHT + "3- Actualización: " + Fore.LIGHTBLUE_EX + "Modificar datos ó cantidad de stock del producto" + Style.RESET_ALL)
+    print(Fore.WHITE +  Style.BRIGHT + "4- Elimininación: " + Fore.LIGHTBLUE_EX + "Dar de baja productos" + Style.RESET_ALL)
+    print(Fore.WHITE +  Style.BRIGHT + "5- Listado: " + Fore.LIGHTBLUE_EX + "Listado por Nombre ó Categoria de Productos" + Style.RESET_ALL)
+    print(Fore.WHITE +  Style.BRIGHT + "6- Reporte de Stock: " + Fore.LIGHTBLUE_EX + "Lista de productos con cantidad Bajo, Medio, Alto" + Style.RESET_ALL)
+    print(Fore.WHITE +  Style.BRIGHT + "7- Salir\n")
 
 
 #? ########################## FUNCTION BUSCAR PRODUCTO #######################################################
@@ -146,12 +146,12 @@ def filtar_productos():
     if len(productos) < 1:
         print(Fore.RED + "\nNo hay productos registrados en la base de datos\n ")
         return
-    print(Fore.YELLOW + "\n----------------------- LISTADO DE PRODUCTOS -----------------------\n")
-    print(Fore.YELLOW + "ID | " + Fore.WHITE + " Producto " + Fore.YELLOW + " | " + Fore.MAGENTA + " Descripción " + Fore.YELLOW + " | " + Fore.WHITE + " Categoría " + Fore.YELLOW + " | " + Fore.BLUE + " Stock " + Fore.YELLOW + " | " + Fore.GREEN + " Precio \n")
-    print(Fore.YELLOW + "-------------------------------------------------")
+    print(Fore.YELLOW + Style.BRIGHT +  "\n----------------------- LISTADO DE PRODUCTOS -----------------------\n")
+    print(Fore.YELLOW + Style.BRIGHT +  "ID | " + Fore.WHITE +  Style.BRIGHT + " Producto " + Fore.YELLOW + Style.BRIGHT +  " | " + Fore.MAGENTA + Style.BRIGHT +  " Descripción " + Fore.YELLOW + Style.BRIGHT + " | " + Fore.WHITE + Style.BRIGHT + " Categoría " + Fore.YELLOW + Style.BRIGHT +  " | " + Fore.BLUE + Style.BRIGHT +  " Stock " + Fore.YELLOW + Style.BRIGHT +  " | " + Fore.GREEN + Style.BRIGHT +  " Precio \n")
+    print(Fore.YELLOW + "----------------------------------------------------------------------")
     for producto in productos:
-        print(Fore.YELLOW + f"{producto[0]}  | " + Fore.WHITE + f"{producto[1]}" + Fore.WHITE + " | " + Fore.MAGENTA + f"{producto[2]}" + Fore.YELLOW + " | " + Fore.WHITE + f"{producto[3]}" + Fore.YELLOW + " | " + Fore.BLUE + f"{producto[4]}" + Fore.YELLOW + " | " + Fore.GREEN + f"{producto[5]}")
-        print(Fore.YELLOW + "-------------------------------------------------")
+        print(Fore.YELLOW + Style.BRIGHT + f"{producto[0]}  | " + Fore.WHITE +  Style.BRIGHT + f"{producto[1]}" + Fore.YELLOW +  Style.BRIGHT + f"{producto[3]}" + Fore.YELLOW + Style.BRIGHT + " | " + Fore.BLUE + Style.BRIGHT + f"{producto[4]}" + Fore.YELLOW + Style.BRIGHT + " | " + Fore.GREEN + Style.BRIGHT + f"{producto[5]}")
+        print(Fore.YELLOW + "----------------------------------------------------------------------")
 
 
 #? ##########################  OPCION 3 - Actualización: Registrar Compras, Ventas y Modificar cantidad de stock del producto ###################################
