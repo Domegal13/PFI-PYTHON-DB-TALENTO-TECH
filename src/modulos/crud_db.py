@@ -298,6 +298,26 @@ def modificar_stock_inventario(id_producto, cantidad, transaccion):
         if conn:
             conn.close()
 
+def modificar_datos_producto(id_producto, nombre_nuevo, descripcion_nueva, categoria_nueva, stock_nuevo, precio_nuevo):
+    try:
+        conn = sql.connect("inventario.db")
+        c = conn.cursor()
+        consulta = """
+                UPDATE productos
+                SET nombre =?, descripcion =?, categoria =?, cantidad =?, precio =?
+                WHERE id =?
+            """
+        c.execute(consulta, (nombre_nuevo, descripcion_nueva, categoria_nueva, stock_nuevo, precio_nuevo, id_producto))
+        print(Fore.GREEN + Style.BRIGHT + f"Los datos del producto con ID: {id_producto} han sido modificados.")
+        conn.commit()
+        return True
+    except sql.Error as e:
+        print(Fore.RED + f"Error al modificar los datos del producto: {e}")
+        return False
+    finally:
+        if conn:
+            conn.close()
+
 
 
 # createDB()

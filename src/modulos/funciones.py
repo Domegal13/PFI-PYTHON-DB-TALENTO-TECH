@@ -158,17 +158,17 @@ def filtar_productos():
         print(Fore.YELLOW + "-------------------------------------------------")
 
 
-#? ##########################  OPCION 3 - Actualización: Modificar cantidad de stock del producto ###################################
+#? ##########################  OPCION 3 - Actualización: Registrar Compras, Ventas y Modificar cantidad de stock del producto ###################################
 
-#! ####################################### MENU STOTK ######################################################
+#! ####################################### MENU DE STOTK ######################################################
 def mostrar_menu_stock():
     print(Fore.YELLOW + Style.BRIGHT + "\n--- Menú Modificar Stock ---")
     print(Fore.WHITE + Style.BRIGHT + "\n1- Registrar Compra de Producto: " + Fore.BLUE + "(Aumentar Stock)" + Style.RESET_ALL)
-    print(Fore.WHITE + Style.BRIGHT +"2- Registrar Venta de Producto: " + Fore.BLUE + " (Disminuir Stock)" + Style.RESET_ALL)
-    print(Fore.WHITE + Style.BRIGHT +"3- Modificar Producto: " + Fore.BLUE + " (Nombre, Descrip, Categoría, Stock, Precio)" + Style.RESET_ALL)
+    print(Fore.WHITE + Style.BRIGHT + "2- Registrar Venta de Producto: " + Fore.BLUE + " (Disminuir Stock)" + Style.RESET_ALL)
+    print(Fore.WHITE + Style.BRIGHT + "3- Modificar Producto: " + Fore.BLUE + " (Nombre, Descrip, Categoría, Stock, Precio)" + Style.RESET_ALL)
     print(Fore.WHITE + Style.BRIGHT + "4- Salir" + Style.RESET_ALL)
 
-#! #######################################  AUMENTAR EL STOCK ##############################################
+#! ####################################### REGISTRAR COMPRA DE PRODUCTO: AUMENTAR EL STOCK ##############################################
 
 def registrar_compra():
     try:
@@ -184,8 +184,7 @@ def registrar_compra():
         print(Fore.YELLOW + Style.BRIGHT + "\n--- Fin de Registro de Compra ---\n" + Style.RESET_ALL)
 
 
-
-#! ####################################### DISMINUIR EL STOCK ##############################################
+#! ####################################### REGISTRAR VENTA DE PRODUCTO: DISMINUIR EL STOCK ##############################################
 def registrar_venta():
     try:
         transaccion = "salida"
@@ -201,6 +200,62 @@ def registrar_venta():
         # limpiar_consola()
 
 
+#! ####################################### MODIFICAR PRODUCTO: NOMBRE, DESCRIPCIÓN, CATEGORÍA, STOCK, PRECIO ##############################################
+
+def modificar_producto():
+    try:
+        # Solicitar el ID del producto
+        id_producto = int(input(Fore.YELLOW + Style.BRIGHT + "Introduzca el ID del producto: " + Fore.WHITE + Style.BRIGHT))
+
+        # Buscar el producto en la base de datos
+        producto = crud_db.buscar_producto_por_id(id_producto)
+        if producto is None:
+            print(Fore.RED + Style.BRIGHT + "\nEl producto no existe en la base de datos\n" + Style.RESET_ALL)
+            return
+
+        print(Fore.YELLOW + Style.BRIGHT + "\n--- Producto Actual ---")
+        print("ID: " + Fore.WHITE + Style.BRIGHT + f"{producto[0]}, " + Fore.YELLOW + Style.BRIGHT + "Nombre: " + Fore.WHITE + Style.BRIGHT + f"{producto[1]}, " + Fore.YELLOW + Style.BRIGHT + "Descripción: "+ Fore.WHITE + Style.BRIGHT + f"{producto[2]}, " + Fore.YELLOW + Style.BRIGHT + "Categoría: " + Fore.WHITE + Style.BRIGHT + f"{producto[3]}, " + Fore.YELLOW + Style.BRIGHT + "Stock: " + Fore.WHITE + Style.BRIGHT + f"{producto[4]}, " + Fore.YELLOW + Style.BRIGHT + "Precio: " + Fore.WHITE + Style.BRIGHT + f"{producto[5]}" + Style.RESET_ALL)
+        print()
+        # Solicitar nuevos datos
+        nombre_nuevo = input(Fore.YELLOW + Style.BRIGHT + "Introduzca el nuevo nombre del producto " + Fore.BLUE + Style.BRIGHT + "(deje vacío para mantener el actual): " + Fore.WHITE + Style.BRIGHT).strip().upper() or producto[1]
+        if not validar_nombre(nombre_nuevo):
+            raise ValueError("El nombre del producto debe tener al menos 3 caracteres.")
+
+        # Solicitar y validar descripcion
+        descripcion_nueva = input(Fore.YELLOW + Style.BRIGHT + "Introduzca la nueva descripción del producto " + Fore.BLUE + Style.BRIGHT + "(deje vacío para mantener la actual): " + Fore.WHITE + Style.BRIGHT).strip() or producto[2]
+        if not validar_descripcion(descripcion_nueva):
+            raise ValueError("La descripción del producto no es válida.")
+
+        # solicitar y validar_categoria
+        categoria_nueva = input(Fore.YELLOW + Style.BRIGHT + "Introduzca la nueva categoría del producto " + Fore.BLUE + Style.BRIGHT + "(deje vacío para mantener la actual): " + Fore.WHITE + Style.BRIGHT).strip() or producto[3]
+        if not validar_categoria(categoria_nueva):
+            raise ValueError("La categoría debe tener al menos 3 caracteres.")
+
+        # Solicitar y validar stock
+        stock_nuevo = input(Fore.YELLOW + Style.BRIGHT + "Introduzca el nuevo stock del producto " + Fore.BLUE + Style.BRIGHT + "(deje vacío para mantener el actual): " + Fore.WHITE + Style.BRIGHT).strip()
+        stock_nuevo = int(stock_nuevo) if stock_nuevo else producto[4]
+        if stock_nuevo < 0:
+            raise ValueError("El stock debe ser un número positivo.")
+
+        # Solicitar y validar precio
+        precio_nuevo = input(Fore.YELLOW + Style.BRIGHT + "Introduzca el nuevo precio del producto " + Fore.BLUE + Style.BRIGHT + "(deje vacío para mantener el actual): " + Fore.WHITE + Style.BRIGHT).strip()
+        precio_nuevo = float(precio_nuevo) if precio_nuevo else producto[5]
+        if precio_nuevo < 0:
+            raise ValueError("El precio debe ser un número positivo.")
+
+        crud_db.modificar_datos_producto(id_producto, nombre_nuevo, descripcion_nueva, categoria_nueva, stock_nuevo, precio_nuevo)
+    except ValueError as e:
+        print(Fore.RED + Style.BRIGHT + f"\nError inesperado: {e}" + Style.RESET_ALL)
+    except Exception as e:
+        print(Fore.RED + Style.BRIGHT + f"\nError inesperado: {e}" + Style.RESET_ALL)
+    finally:
+        print(Fore.YELLOW + Style.BRIGHT + "\n--- Fin de Modificación ---\n" + Style.RESET_ALL)
+        # limpiar_consola()
+    return nombre_nuevo, descripcion_nueva, categoria_nueva, stock_nuevo, precio_nuevo
+
+
+#! ####################################### LIMPIAR CONSOLA ########################################
+
 #! ####################################### SWITCH CASE MODIFICAR STOCK #####################################
 def switch_case_stock(opc):
     match(opc):
@@ -211,6 +266,9 @@ def switch_case_stock(opc):
             limpiar_consola()
             registrar_venta()
         case 3:
+            limpiar_consola()
+            modificar_producto()
+        case 4:
             print(Fore.YELLOW + Style.BRIGHT + "\nSaliendo de Modificar Stock" + Style.RESET_ALL)
         case _:
             print(Fore.RED + Style.BRIGHT + "\nOpción inválida..." + Style.RESET_ALL)
@@ -218,10 +276,10 @@ def switch_case_stock(opc):
 #! ####################################### FUNCTION MODIFICAR STOCK ########################################
 def modificar_stock():
     opc = 0
-    while opc != 3:
+    while opc != 4:
         mostrar_menu_stock()
         try:
-            opc = int(input(Fore.YELLOW + Style.BRIGHT + "\nSeleccione una opción 1-3: " + Style.RESET_ALL))
+            opc = int(input(Fore.YELLOW + Style.BRIGHT + "\nSeleccione una opción 1-4: " + Style.RESET_ALL))
             switch_case_stock(opc)
         except ValueError:
             print(Fore.RED + Style.BRIGHT + "\nOpción Inválida...")
