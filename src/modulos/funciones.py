@@ -222,12 +222,12 @@ def modificar_producto():
             raise ValueError("El nombre del producto debe tener al menos 3 caracteres.")
 
         # Solicitar y validar descripcion
-        descripcion_nueva = input(Fore.YELLOW + Style.BRIGHT + "Introduzca la nueva descripción del producto " + Fore.BLUE + Style.BRIGHT + "(deje vacío para mantener la actual): " + Fore.WHITE + Style.BRIGHT).strip() or producto[2]
+        descripcion_nueva = input(Fore.YELLOW + Style.BRIGHT + "Introduzca la nueva descripción del producto " + Fore.BLUE + Style.BRIGHT + "(deje vacío para mantener la actual): " + Fore.WHITE + Style.BRIGHT).strip().upper() or producto[2]
         if not validar_descripcion(descripcion_nueva):
             raise ValueError("La descripción del producto no es válida.")
 
         # solicitar y validar_categoria
-        categoria_nueva = input(Fore.YELLOW + Style.BRIGHT + "Introduzca la nueva categoría del producto " + Fore.BLUE + Style.BRIGHT + "(deje vacío para mantener la actual): " + Fore.WHITE + Style.BRIGHT).strip() or producto[3]
+        categoria_nueva = input(Fore.YELLOW + Style.BRIGHT + "Introduzca la nueva categoría del producto " + Fore.BLUE + Style.BRIGHT + "(deje vacío para mantener la actual): " + Fore.WHITE + Style.BRIGHT).strip().upper() or producto[3]
         if not validar_categoria(categoria_nueva):
             raise ValueError("La categoría debe tener al menos 3 caracteres.")
 
