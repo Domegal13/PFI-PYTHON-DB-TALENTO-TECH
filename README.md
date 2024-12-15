@@ -1,7 +1,5 @@
 <h1 align="center"> PROYECTO FINAL INTEGRADOR - TALENTO TECH </h1>
 
----
-
 # Sistema de inventario 🏁
 
 - ### El sistema de inventario es una aplicación que permite a los usuarios gestionar un inventario de productos, con las funcionalidades de Agregar, Modificar, eliminar y buscar productos.
@@ -36,26 +34,63 @@ El Sistema proporciona las siguientes funcionalidades:
 - `Salir` - Permite Salir del Sistema.
 
 ---
+
 ## Instalación 🔧
 
 1. Clone el repositorio:
 
    ```sh
-   git clone https://github.com/Domegal13/plantas-api.git
+   git clone https://github.com/Domegal13/PFI-PYTHON-DB-TALENTO-TECH.git
    ```
 
 2. Navega al directorio del proyecto:
 
-   `cd repositorio-plantas`
+   `cd Proyecto-PFI-PYTHON-DB`
 
-3. Instala las dependencias:
+3. Cree un entorno virtual (opcional):
 
-   `npm install`
+    `python -m venv 'Nombre_del_entorno_virtual'`
+
+    3.1. Active el entorno virtual:
+
+    `Nombre_del_entorno_virtual/Scripts/activate`
+
+4. Instala las dependencias:
+
+   `pip install -r requirements.txt`
+
+---
+
+## Uso 📄
+
+1. Entre a su editor de codigo y dirijase a la ruta de su proyecto.
+
+2. Luego abra el archivo app.py y ejecute la aplicación
+
+    2.1. - Se creará la base de datos 'inventario.db'.
+
+    - **Nota:** Para visializar la Base de Datos puede descargar la extensión 'SQLite Viewer'
+
+   ![SQLiteViewer](src/imagenes/SQLiteViewer.png)
+
+3. Se mostrará el siguiente menú.
+
+**Menu Principal:**
+
+![Menu Principal](src/imagenes/menu_principal.png)
 
 ---
 
 ## Autor ✒️
 
-[<img src="https://avatars.githubusercontent.com/u/105987399?v=4" width="30"  style="border-radius: 30px;" align="center">](https://github.com/Domegal13) **_Doménico Gallo García_**
+| <h3 align="center">Nombre</h3>                                                                                                                                                                                                                                                                                    | <h3 align="center">GitHub</h3>                                                                                                             | <h3 align="center">Linkedin</h3>                                                                                                                                                                                                                     |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [<img src="https://avatars.githubusercontent.com/u/105987399?v=4" width="30"  style="border-radius: 30px;" align="center">](https://github.com/Domegal13) **_Doménico Gallo García_**                                                                                                                             | [<img alt="Static Badge" src="https://img.shields.io/badge/GitHub-181717?logo=GitHub&logoColor=white">](https://github.com/Domegal13)      | [<img alt="Static Badge" src="https://img.shields.io/badge/Linkedin-0A66C2?logo=Linkedin&logoColor=white">](https://www.linkedin.com/in/domegal13/)                                                                                                  |
 
-[<img alt="Static Badge" src="https://img.shields.io/badge/GitHub-181717?logo=GitHub&logoColor=white">](https://github.com/Domegal13/PFI-PYTHON-DB-TALENTO-TECH) \* [<img alt="Static Badge" src="https://img.shields.io/badge/Linkedin-0A66C2?logo=Linkedin&logoColor=white">](https://www.linkedin.com/in/domegal13/)
+
+---
+
+## Agradecimientos 🎉
+
+**_Quiero expresar mi agradecimiento especial a:_**
+
