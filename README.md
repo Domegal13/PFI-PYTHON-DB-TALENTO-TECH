@@ -84,7 +84,7 @@ El Sistema proporciona las siguientes funcionalidades:
 ## Autor ✒️
 
 
- [<img src="https://avatars.githubusercontent.com/u/105987399?v=4" width="30"  style="border-radius: 30px;" align="center">](https://github.com/Domegal13) **_Doménico Gallo García_**                                                                                                                               [<img alt="Static Badge" src="https://img.shields.io/badge/GitHub-181717?logo=GitHub&logoColor=white">](https://github.com/Domegal13)        [<img alt="Static Badge" src="https://img.shields.io/badge/Linkedin-0A66C2?logo=Linkedin&logoColor=white">](https://www.linkedin.com/in/domegal13/)                                                                                                  
+ [<img src="https://avatars.githubusercontent.com/u/105987399?v=4" width="30"  style="border-radius: 30px;" align="center">](https://github.com/Domegal13) **_Doménico Gallo García_**                                                                                                                               ![<img alt="Static Badge" src="https://img.shields.io/badge/GitHub-181717?logo=GitHub&logoColor=white">](https://github.com/Domegal13)        [<img alt="Static Badge" src="https://img.shields.io/badge/Linkedin-0A66C2?logo=Linkedin&logoColor=white">](https://www.linkedin.com/in/domegal13/)                                                                                                  
 
 
 ---
