@@ -83,14 +83,17 @@ El Sistema proporciona las siguientes funcionalidades:
 
 ## Autor ✒️
 
-| <h3 align="center">Nombre</h3>                                                                                                                                                                                                                                                                                    | <h3 align="center">GitHub</h3>                                                                                                             | <h3 align="center">Linkedin</h3>                                                                                                                                                                                                                     |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [<img src="https://avatars.githubusercontent.com/u/105987399?v=4" width="30"  style="border-radius: 30px;" align="center">](https://github.com/Domegal13) **_Doménico Gallo García_**                                                                                                                             | [<img alt="Static Badge" src="https://img.shields.io/badge/GitHub-181717?logo=GitHub&logoColor=white">](https://github.com/Domegal13)      | [<img alt="Static Badge" src="https://img.shields.io/badge/Linkedin-0A66C2?logo=Linkedin&logoColor=white">](https://www.linkedin.com/in/domegal13/)                                                                                                  |
+[<img src="https://avatars.githubusercontent.com/u/105987399?v=4" width="30"  style="border-radius: 30px;" align="center">](https://github.com/Domegal13) **_Doménico Gallo García_**                                                                                                                                        [<img alt="Static Badge" src="https://img.shields.io/badge/GitHub-181717?logo=GitHub&logoColor=white">](https://github.com/Domegal13)                        [<img alt="Static Badge" src="https://img.shields.io/badge/Linkedin-0A66C2?logo=Linkedin&logoColor=white">](https://www.linkedin.com/in/domegal13/)
+
+
 
 
 ---
 
 ## Agradecimientos 🎉
 
-**_Quiero expresar mi agradecimiento especial a:_**
+**_Quiero expresar mi más sincero agradecimiento a:_** 
 
+Talento Tech: Por brindarme la oportunidad de ser parte de esta increíble comunidad, llena de aprendizaje y crecimiento.
+
+A nuestro Tutor, Ber Schargorodsky y Prof. José Montezuma: Por su guía excepcional, dedicación y valiosos consejos durante estos cuatro meses, que han sido fundamentales para la realización de este proyecto.

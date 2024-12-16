@@ -150,7 +150,7 @@ def filtar_productos():
     print(Fore.YELLOW + Style.BRIGHT +  "ID | " + Fore.WHITE +  Style.BRIGHT + " Producto " + Fore.YELLOW + Style.BRIGHT +  " | " + Fore.MAGENTA + Style.BRIGHT +  " Descripción " + Fore.YELLOW + Style.BRIGHT + " | " + Fore.WHITE + Style.BRIGHT + " Categoría " + Fore.YELLOW + Style.BRIGHT +  " | " + Fore.BLUE + Style.BRIGHT +  " Stock " + Fore.YELLOW + Style.BRIGHT +  " | " + Fore.GREEN + Style.BRIGHT +  " Precio \n")
     print(Fore.YELLOW + "----------------------------------------------------------------------")
     for producto in productos:
-        print(Fore.YELLOW + Style.BRIGHT + f"{producto[0]}  | " + Fore.WHITE +  Style.BRIGHT + f"{producto[1]}" + Fore.YELLOW +  Style.BRIGHT + f"{producto[3]}" + Fore.YELLOW + Style.BRIGHT + " | " + Fore.BLUE + Style.BRIGHT + f"{producto[4]}" + Fore.YELLOW + Style.BRIGHT + " | " + Fore.GREEN + Style.BRIGHT + f"{producto[5]}")
+        print(Fore.YELLOW + Style.BRIGHT + f"{producto[0]}  | " + Fore.WHITE +  Style.BRIGHT + f"{producto[1]}" + Fore.YELLOW +  Style.BRIGHT + " | " + Fore.MAGENTA +  Style.BRIGHT +f"{producto[2]}" + Fore.YELLOW + Style.BRIGHT + " | " + Fore.WHITE +  Style.BRIGHT + f"{producto[3]}" + Fore.YELLOW +  Style.BRIGHT + " | " + Fore.BLUE + Style.BRIGHT + f"{producto[4]}" + Fore.YELLOW + Style.BRIGHT + " | " + Fore.GREEN + Style.BRIGHT + f"{producto[5]}")
         print(Fore.YELLOW + "----------------------------------------------------------------------")
 
 
@@ -282,13 +282,13 @@ def eliminar_producto():
     try:
         producto_id = int(input(Fore.YELLOW + "\n Introduzca el Id del Producto a eliminar: " + Style.RESET_ALL))
         filtrar_x_id = crud_db.buscar_producto_por_id(producto_id)
-        print(filtrar_x_id)
+        # print(filtrar_x_id)
         if filtrar_x_id == None:
             print(Fore.RED + Style.BRIGHT + "\nProducto no encontrado..." + Style.RESET_ALL)
             return
         id_producto = filtrar_x_id[0]
         nombre_producto = filtrar_x_id[1]
-        resp = input(Fore.LIGHTMAGENTA_EX + "\nEstá seguro de elimiar el producto con " + Fore.BLUE + Style.BRIGHT + f"Id: {id_producto} Nombre: {nombre_producto}" + Fore.LIGHTMAGENTA_EX  + " - S/N:") 
+        resp = input(Fore.LIGHTMAGENTA_EX + "\nEstá seguro de elimiar el producto con " + Fore.BLUE + Style.BRIGHT + "Id: " + Fore.WHITE + Style.BRIGHT + f"{id_producto} " + Fore.BLUE + Style.BRIGHT +  "Nombre: " + Fore.WHITE + Style.BRIGHT + f"{nombre_producto}" + Fore.LIGHTMAGENTA_EX  + " - S/N:") 
         if resp == "S" or resp == "s":
             producto_a_eliminar = crud_db.eliminar_producto(producto_id)
             if producto_a_eliminar:
